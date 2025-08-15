@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./polyfills";
+import EmotionProvider from './emotion-provider';
+import { ErrorBoundary } from '../components/error-boundary';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,7 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <ErrorBoundary>
+          <EmotionProvider>
+            {children}
+          </EmotionProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );
